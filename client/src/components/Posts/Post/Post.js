@@ -13,19 +13,19 @@ const Post = ({ post, setPostId }) => {
   const dispatch = useDispatch();
 
   return (
-    <div class="container mx-auto max-w-xs bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
-      <div class="flex items-center justify-between px-4 border-b-2">
-        <div class="flex justify-between items-center py-4">
+    <div className="container mx-auto max-w-xs bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
+      <div className="flex items-center justify-between px-4 border-b-2">
+        <div className="flex justify-between items-center py-4">
           <img
-            class="w-12 rounded-full border-2 border-purple-600"
+            className="w-12 rounded-full border-2 border-purple-600"
             src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
             alt="Alex"
           />
-          <div class="ml-3">
-            <h1 class="text-xl font-bold text-gray-800 cursor-pointer">
+          <div className="ml-3">
+            <h1 className="text-xl font-bold text-gray-800 cursor-pointer">
               {post.creator}
             </h1>
-            <p class="text-sm text-gray-800 hover:underline cursor-pointer">
+            <p className="text-sm text-gray-800 hover:underline cursor-pointer">
               {moment(post.createdAt).fromNow()}
             </p>
           </div>
@@ -35,17 +35,17 @@ const Post = ({ post, setPostId }) => {
         </button>
       </div>
       {post?.selectedFile && <img src={post.selectedFile} alt="Post Image" />}
-      <div class="p-6 pb-4">
-        <h1 class="text-3xl font-bold text-gray-800 cursor-pointer ">
+      <div className="p-6 pb-4">
+        <h1 className="text-3xl font-bold text-gray-800 cursor-pointer ">
           {post.title}
         </h1>
-        <h2 class="text-gray-800 font-semibold">
+        <h2 className="text-gray-800 font-semibold">
           Tags: {post.tags.join(", ")}
         </h2>
-        <p class="text-lg font font-thin">{post.message}</p>
+        <p className="text-lg font font-thin">{post.message}</p>
       </div>
       <hr />
-      <div class="flex flex-row justify-between p-6 pt-2 pb-2">
+      <div className="flex flex-row justify-between p-6 pt-2 pb-2">
         <div>
           <button type="button" onClick={() => dispatch(likePost(post._id))}>
             <FontAwesomeIcon
