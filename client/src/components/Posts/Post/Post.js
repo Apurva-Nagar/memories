@@ -3,7 +3,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart as farHeart,
   faEdit as farEdit,
@@ -11,6 +11,47 @@ import {
 
 const Post = ({ post, setPostId }) => {
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user_auth"));
+
+  const PostLikes = () => {
+    const { likes } = post;
+    const likedByUser = likes.find(
+      (like) => like === (user?.result?.googleId || user?.result?._id)
+    );
+
+    const likeCount = () => {
+      if (!likes.length || (likedByUser && likes.length === 1)) {
+        return null;
+      }
+      if (likedByUser) {
+        return (
+          <span className="pl-1 text-red-600">
+            {likes.length > 2
+              ? `You and ${likes.length - 1} others liked this post`
+              : "You and one more person liked this post"}
+          </span>
+        );
+      }
+      return (
+        <span className="pl-1 text-red-600">{`${likes.length} ${
+          likes.length > 1 ? "Likes" : "Like"
+        }`}</span>
+      );
+    };
+
+    return (
+      <div>
+        <button type="button" onClick={() => dispatch(likePost(post._id))}>
+          <FontAwesomeIcon
+            icon={likedByUser ? faHeart : farHeart}
+            className="text-red-600"
+            size="lg"
+          />
+        </button>
+        {likeCount()}
+      </div>
+    );
+  };
 
   return (
     <div className="container mx-auto max-w-xs bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
@@ -46,16 +87,7 @@ const Post = ({ post, setPostId }) => {
       </div>
       <hr />
       <div className="flex flex-row justify-between p-6 pt-2 pb-2">
-        <div>
-          <button type="button" onClick={() => dispatch(likePost(post._id))}>
-            <FontAwesomeIcon
-              icon={farHeart}
-              className="text-red-600"
-              size="lg"
-            />
-          </button>
-          <span className="pl-1 text-red-600">{post.likes.length}</span>
-        </div>
+        {PostLikes()}
         <button type="button" onClick={() => dispatch(deletePost(post._id))}>
           <FontAwesomeIcon icon={faTrashAlt} className="text-red-600" />
         </button>
