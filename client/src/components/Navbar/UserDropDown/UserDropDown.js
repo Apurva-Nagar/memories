@@ -1,4 +1,6 @@
 import { useState } from "react";
+import avatar from "../../../assets/avatar.png";
+
 const UserDropDown = ({ userDetails, handleLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -10,7 +12,7 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
             <div className="flex justify-center items-center space-x-3 cursor-pointer">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-600">
                 <img
-                  src={userDetails.imageUrl}
+                  src={userDetails.imageUrl ? userDetails.imageUrl : avatar}
                   alt={userDetails.name}
                   className="w-full h-full object-cover"
                 />

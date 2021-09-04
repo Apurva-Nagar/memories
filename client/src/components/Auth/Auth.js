@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
 import { AUTH } from "../../constants/actionTypes";
+import { signin, signup } from "../../actions/auth";
 import { GoogleLogin } from "react-google-login";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -10,13 +13,31 @@ import {
   faEyeSlash as farEyeSlash,
 } from "@fortawesome/free-regular-svg-icons";
 
+const initialFormState = {
+  name: "",
+  email: "",
+  password: "",
+};
+
 const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignIn) {
+      dispatch(signin(formData, history));
+    } else {
+      dispatch(signup(formData, history));
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleAuthSuccess = async (res) => {
     const result = res?.profileObj;
@@ -48,9 +69,8 @@ const Auth = () => {
             type="text"
             name="name"
             id="name"
+            onChange={handleChange}
             autoFocus
-            // value={}
-            // onChange={}
           />
         )}
         <input
@@ -60,8 +80,7 @@ const Auth = () => {
           type="email"
           name="email"
           id="email"
-          // value={}
-          // onChange={}
+          onChange={handleChange}
         />
         <div className="relative">
           <input
@@ -71,8 +90,7 @@ const Auth = () => {
             type={showPassword ? "text" : "password"}
             name="password"
             id="password"
-            // value={}
-            // onChange={}
+            onChange={handleChange}
           />
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
             <button
@@ -99,7 +117,7 @@ const Auth = () => {
           clientId="403337593566-e111og3qco29l97c0p1ve7gfuhl3a2kf.apps.googleusercontent.com"
           render={(renderProps) => (
             <button
-              className="w-2/3 mt-3 p-2 border-2 rounded-lg"
+              className="w-2/3 mt-3 p-2 border-2 rounded-lg text-purple-600 border-purple-600 hover:border-transparent hover:bg-purple-600 hover:text-white"
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
             >

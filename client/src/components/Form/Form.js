@@ -8,7 +8,6 @@ const Form = ({ postId, setPostId }) => {
     postId ? state.posts.find((post) => post._id === postId) : null
   );
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: [],
@@ -21,11 +20,12 @@ const Form = ({ postId, setPostId }) => {
     }
   }, [post, postId]);
 
+  const user = JSON.parse(localStorage.getItem("user_auth"));
+
   const dispatch = useDispatch();
 
   const clear = () => {
     setPostData({
-      creator: "",
       title: "",
       message: "",
       tags: [],
@@ -40,7 +40,7 @@ const Form = ({ postId, setPostId }) => {
     if (postId) {
       dispatch(updatePost(postId, postData));
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
 
     clear();
@@ -50,18 +50,6 @@ const Form = ({ postId, setPostId }) => {
     <div className="w-2/3 border rounded-md border-gray-300 p-5 ">
       <h1 className="text-lg font-semibold">Create a new memory!</h1>
       <form className="mt-5" onSubmit={handleSubmit}>
-        <input
-          placeholder="Creator"
-          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-          required="required"
-          type="text"
-          name="creator"
-          id="creator"
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
         <input
           placeholder="Title"
           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"

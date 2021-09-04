@@ -23,7 +23,7 @@ const Post = ({ post, setPostId }) => {
           />
           <div className="ml-3">
             <h1 className="text-xl font-bold text-gray-800 cursor-pointer">
-              {post.creator}
+              {post.name}
             </h1>
             <p className="text-sm text-gray-800 hover:underline cursor-pointer">
               {moment(post.createdAt).fromNow()}
@@ -54,7 +54,7 @@ const Post = ({ post, setPostId }) => {
               size="lg"
             />
           </button>
-          <span className="pl-1 text-red-600">{post.likeCount}</span>
+          <span className="pl-1 text-red-600">{post.likes.length}</span>
         </div>
         <button type="button" onClick={() => dispatch(deletePost(post._id))}>
           <FontAwesomeIcon icon={faTrashAlt} className="text-red-600" />

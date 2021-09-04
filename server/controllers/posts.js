@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
+import User from "../models/user.js";
 
 export const getPosts = async (req, res) => {
   try {
@@ -12,7 +13,11 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  const newPost = new PostMessage(post);
+  const newPost = new PostMessage({
+    ...post,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await newPost.save();
@@ -58,13 +63,22 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
+  if (!req.userId) {
+    return res.json({ message: "Login to continue" });
+  }
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: `Invalid id - ${id}` });
   }
 
   try {
     const post = await PostMessage.findById(id);
-    post.likeCount += 1;
+    const index = post.likes.findIndex((id) => id === String(req.userId));
+    if (index === -1) {
+      post.likes.push(req.userId);
+    } else {
+      post.likes = post.likes.filter((id) => id !== String(req.userId));
+    }
     await post.save();
     res.status(200).json(post);
   } catch (err) {
