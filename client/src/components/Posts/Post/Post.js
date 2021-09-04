@@ -12,6 +12,9 @@ import {
 const Post = ({ post, setPostId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user_auth"));
+  const postedByUser =
+    user?.result?.googleId === post?.creator ||
+    user?.result?.googleId === post?.creator;
 
   const PostLikes = () => {
     const { likes } = post;
@@ -25,7 +28,7 @@ const Post = ({ post, setPostId }) => {
       }
       if (likedByUser) {
         return (
-          <span className="pl-1 text-red-600">
+          <span className="pl-1 text-red-600 text-sm">
             {likes.length > 2
               ? `You and ${likes.length - 1} others liked this post`
               : "You and one more person liked this post"}
@@ -33,7 +36,7 @@ const Post = ({ post, setPostId }) => {
         );
       }
       return (
-        <span className="pl-1 text-red-600">{`${likes.length} ${
+        <span className="pl-1 text-red-600 text-sm">{`${likes.length} ${
           likes.length > 1 ? "Likes" : "Like"
         }`}</span>
       );
@@ -71,9 +74,11 @@ const Post = ({ post, setPostId }) => {
             </p>
           </div>
         </div>
-        <button type="button" onClick={() => setPostId(post._id)}>
-          <FontAwesomeIcon icon={farEdit} className="" />
-        </button>
+        {postedByUser && (
+          <button type="button" onClick={() => setPostId(post._id)}>
+            <FontAwesomeIcon icon={farEdit} className="" />
+          </button>
+        )}
       </div>
       {post?.selectedFile && <img src={post.selectedFile} alt="Post Image" />}
       <div className="p-6 pb-4">
@@ -87,10 +92,12 @@ const Post = ({ post, setPostId }) => {
       </div>
       <hr />
       <div className="flex flex-row justify-between p-6 pt-2 pb-2">
-        {PostLikes()}
-        <button type="button" onClick={() => dispatch(deletePost(post._id))}>
-          <FontAwesomeIcon icon={faTrashAlt} className="text-red-600" />
-        </button>
+        <PostLikes />
+        {postedByUser && (
+          <button type="button" onClick={() => dispatch(deletePost(post._id))}>
+            <FontAwesomeIcon icon={faTrashAlt} className="text-red-600" />
+          </button>
+        )}
       </div>
     </div>
   );
