@@ -38,7 +38,7 @@ const Form = ({ postId, setPostId }) => {
     e.preventDefault();
 
     if (postId) {
-      dispatch(updatePost(postId, postData));
+      dispatch(updatePost(postId, { ...postData, name: user?.result?.name }));
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
