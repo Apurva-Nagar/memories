@@ -14,7 +14,7 @@ const Post = ({ post, setPostId }) => {
   const user = JSON.parse(localStorage.getItem("user_auth"));
   const postedByUser =
     user?.result?.googleId === post?.creator ||
-    user?.result?.googleId === post?.creator;
+    user?.result?._id === post?.creator;
 
   const PostLikes = () => {
     const { likes } = post;
@@ -57,19 +57,19 @@ const Post = ({ post, setPostId }) => {
   };
 
   return (
-    <div className="container mx-auto max-w-xs bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
-      <div className="flex items-center justify-between px-4 border-b-2">
-        <div className="flex justify-between items-center py-4">
+    <div className="container mx-auto max-w-xl bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
+      <div className="flex items-center justify-between px-4">
+        <div className="flex justify-between items-center py-3">
           <img
-            className="w-12 rounded-full border-2 border-purple-600"
+            className="w-12 rounded-full"
             src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
             alt="Alex"
           />
           <div className="ml-3">
-            <h1 className="text-xl font-bold text-gray-800 cursor-pointer">
+            <h1 className="font-bold text-gray-800 cursor-pointer">
               {post.name}
             </h1>
-            <p className="text-sm text-gray-800 hover:underline cursor-pointer">
+            <p className="text-sm text-gray-800">
               {moment(post.createdAt).fromNow()}
             </p>
           </div>
@@ -81,14 +81,11 @@ const Post = ({ post, setPostId }) => {
         )}
       </div>
       {post?.selectedFile && <img src={post.selectedFile} alt="Post Image" />}
-      <div className="p-6 pb-4">
-        <h1 className="text-3xl font-bold text-gray-800 cursor-pointer ">
-          {post.title}
-        </h1>
-        <h2 className="text-gray-800 font-semibold">
-          Tags: {post.tags.join(", ")}
-        </h2>
-        <p className="text-lg font font-thin">{post.message}</p>
+      <div className="py-2 px-6">
+        <p className="text-lg font font-thin">{post.caption}</p>
+        <p className="text-gray-800 font-thin text-sm">
+          Tagged: {post.tags.join(", ")}
+        </p>
       </div>
       <hr />
       <div className="flex flex-row justify-between p-6 pt-2 pb-2">

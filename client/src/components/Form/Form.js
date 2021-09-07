@@ -8,8 +8,7 @@ const Form = ({ postId, setPostId }) => {
     postId ? state.posts.find((post) => post._id === postId) : null
   );
   const [postData, setPostData] = useState({
-    title: "",
-    message: "",
+    caption: "",
     tags: [],
     selectedFile: "",
   });
@@ -26,8 +25,7 @@ const Form = ({ postId, setPostId }) => {
 
   const clear = () => {
     setPostData({
-      title: "",
-      message: "",
+      caption: "",
       tags: [],
       selectedFile: "",
     });
@@ -47,32 +45,23 @@ const Form = ({ postId, setPostId }) => {
   };
 
   return (
-    <div className="w-2/3 border rounded-md border-gray-300 p-5 ">
+    <div className="w-2/3 border rounded-md border-gray-300 p-5 bg-white">
       <h1 className="text-lg font-semibold">Create a new memory!</h1>
       <form className="mt-5" onSubmit={handleSubmit}>
-        <input
-          placeholder="Title"
-          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
-          required="required"
-          type="text"
-          name="title"
-          id="title"
-          value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-        />
         <textarea
-          placeholder="Message"
-          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 p-2 mt-4"
+          placeholder="Caption"
+          className="resize-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 p-2 mt-4"
           required="required"
-          name="message"
-          id="message"
-          rows={5}
-          cols={5}
-          value={postData.message}
+          name="caption"
+          id="caption"
+          rows={20}
+          cols={20}
+          value={postData.caption}
           onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
+            setPostData({ ...postData, caption: e.target.value })
           }
-        />
+        ></textarea>
+
         <input
           placeholder="Tags"
           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"

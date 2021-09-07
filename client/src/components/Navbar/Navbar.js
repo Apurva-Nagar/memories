@@ -24,7 +24,7 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className="flex items-center justify-between flex-wrap pt-4 pb-4 pl-6 pr-6 border-b-2">
+    <nav className="bg-white flex items-center justify-between flex-wrap pt-4 pb-4 pl-6 pr-6 border-b-2">
       <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
         <a href="/" className="text-4xl font-bold tracking-tight">
           Memories

@@ -29,15 +29,14 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   const { id } = req.params;
-  const { title, message, creator, selectedFile, tags, likes, name } = req.body;
+  const { caption, creator, selectedFile, tags, likes, name } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: `Invalid id - ${id}` });
   }
 
   const updatedPost = {
-    title,
-    message,
+    caption,
     creator,
     name,
     selectedFile,

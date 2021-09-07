@@ -9,7 +9,7 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
       <div className="bg-gray-200 flex justify-center items-center">
         <div className="bg-white w-64 shadow flex justify-center items-center">
           <div className="" onClick={() => setMenuOpen(!menuOpen)}>
-            <div className="flex justify-center items-center space-x-3 cursor-pointer">
+            <div className="flex justify-center items-center space-x-3 cursor-pointer mr-10">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-600">
                 <img
                   src={userDetails.imageUrl ? userDetails.imageUrl : avatar}
@@ -24,7 +24,7 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
             {menuOpen && (
               <div
                 onMouseLeave={() => setMenuOpen(!menuOpen)}
-                className="absolute w-56 px-5 py-3 bg-white rounded-lg shadow border mt-2"
+                className="absolute w-1/6 px-5 py-3 bg-white rounded-lg shadow border mt-2"
               >
                 <ul className="space-y-3">
                   <li className="font-medium">
