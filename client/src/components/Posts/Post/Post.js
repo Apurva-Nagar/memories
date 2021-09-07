@@ -80,7 +80,7 @@ const Post = ({ post, setPostId }) => {
           </button>
         )}
       </div>
-      {post?.selectedFile && <img src={post.selectedFile} alt="Post Image" />}
+      {post.selectedFile && <img src={post.selectedFile} alt={post.caption} />}
       <div className="py-2 px-6">
         <p className="text-lg font font-thin">{post.caption}</p>
         <p className="text-gray-800 font-thin text-sm">

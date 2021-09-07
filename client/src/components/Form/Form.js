@@ -45,8 +45,11 @@ const Form = ({ postId, setPostId }) => {
   };
 
   return (
-    <div className="w-2/3 border rounded-md border-gray-300 p-5 bg-white">
-      <h1 className="text-lg font-semibold">Create a new memory!</h1>
+    <div className="w-4/5 border rounded-md border-gray-300 p-5 bg-white">
+      <h1 className="text-lg font-semibold mb-2">Create a new memory!</h1>
+      {postData.selectedFile && (
+        <img src={postData.selectedFile} alt="Preview" />
+      )}
       <form className="mt-5" onSubmit={handleSubmit}>
         <textarea
           placeholder="Caption"
@@ -60,8 +63,7 @@ const Form = ({ postId, setPostId }) => {
           onChange={(e) =>
             setPostData({ ...postData, caption: e.target.value })
           }
-        ></textarea>
-
+        />
         <input
           placeholder="Tags"
           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
