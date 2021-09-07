@@ -7,18 +7,13 @@ import Auth from "./components/Auth/Auth";
 import LandingPage from "./components/LandingPage/LandingPage";
 
 const App = () => {
-  const loggedIn = JSON.parse(localStorage.getItem("user_auth"));
-  console.log("Test", loggedIn);
-
   return (
     <BrowserRouter>
       <Navbar />
       <Switch>
-        <Route path="/" exact>
-          {loggedIn ? <Redirect to="/feed" /> : <LandingPage />}
-        </Route>
-        <Route path="/feed" component={Home} />
-        <Route path="/auth" component={Auth} />
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/feed" exact component={Home} />
+        <Route path="/auth" exact component={Auth} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, Redirect, useLocation } from "react-router-dom";
 
 import { ReactComponent as PizzaSVG } from "../../assets/pizza_sharing.svg";
 import { ReactComponent as FamilySVG } from "../../assets/family.svg";
@@ -8,7 +9,18 @@ import { ReactComponent as GameDaySVG } from "../../assets/undraw_game_day.svg";
 import { ReactComponent as VictorySVG } from "../../assets/undraw_finish_line.svg";
 
 const LandingPage = () => {
-  return (
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("user_auth"))
+  );
+
+  useEffect(() => {
+    setIsLoggedIn(JSON.parse(localStorage.getItem("user_auth")));
+  }, [location]);
+
+  return isLoggedIn ? (
+    <Redirect to="/feed" />
+  ) : (
     <div className="bg-white min-h-full pt-5">
       <div className="grid grid-cols-2">
         <div className="flex h-full flex-col items-start justify-center ml-10">
