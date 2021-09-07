@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 
 import UserDropDown from "./UserDropDown/UserDropDown";
 
@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT", payload: null });
-    history.push("/auth");
+    history.push("/");
     setUser(null);
   };
 
@@ -26,9 +26,9 @@ const Navbar = () => {
   return (
     <nav className="bg-white flex items-center justify-between flex-wrap pt-4 pb-4 pl-6 pr-6 border-b-2">
       <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
-        <a href="/" className="text-4xl font-bold tracking-tight">
+        <Link to="/" className="text-4xl font-bold tracking-tight">
           Memories
-        </a>
+        </Link>
       </div>
       <div className="mt-2 w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
@@ -54,12 +54,12 @@ const Navbar = () => {
 
         {!user ? (
           <div>
-            <a
-              href="/auth"
+            <Link
+              to="/auth"
               className="inline-block text-sm text-purple-600 px-4 py-2 leading-none border rounded border-purple-600 hover:border-transparent hover:text-white hover:bg-purple-600 mt-4 lg:mt-0"
             >
               Sign-in
-            </a>
+            </Link>
           </div>
         ) : (
           <UserDropDown

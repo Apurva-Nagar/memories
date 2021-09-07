@@ -46,7 +46,9 @@ const Form = ({ postId, setPostId }) => {
 
   return (
     <div className="w-4/5 border rounded-md border-gray-300 p-5 bg-white">
-      <h1 className="text-lg font-semibold mb-2">Create a new memory!</h1>
+      <h1 className="text-lg font-semibold mb-2">
+        {postId ? "Edit memory" : "Create a new memory!"}
+      </h1>
       {postData.selectedFile && (
         <img src={postData.selectedFile} alt="Preview" />
       )}

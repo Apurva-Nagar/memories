@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { AUTH } from "../../constants/actionTypes";
 import { signin, signup } from "../../actions/auth";
@@ -25,6 +25,14 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialFormState);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location?.state) {
+      const { fromLandingPage } = location.state;
+      setIsSignIn(!fromLandingPage);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +53,7 @@ const Auth = () => {
 
     try {
       dispatch({ type: AUTH, payload: { token, result } });
-      history.push("/");
+      history.push("/feed");
     } catch (error) {
       console.log(error);
     }

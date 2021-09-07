@@ -24,7 +24,7 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
             {menuOpen && (
               <div
                 onMouseLeave={() => setMenuOpen(!menuOpen)}
-                className="absolute w-1/6 px-5 py-3 bg-white rounded-lg shadow border mt-2"
+                className="absolute w-1/6 px-5 py-3 bg-white rounded-lg shadow border mt-2 z-50"
               >
                 <ul className="space-y-3">
                   <li className="font-medium">
