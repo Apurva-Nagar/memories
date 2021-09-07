@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT", payload: null });
-    history.push("/");
+    history.push("/auth");
     setUser(null);
   };
 
@@ -26,7 +26,10 @@ const Navbar = () => {
   return (
     <nav className="bg-white flex items-center justify-between flex-wrap pt-4 pb-4 pl-6 pr-6 border-b-2">
       <div className="flex items-center flex-shrink-0 text-gray-800 mr-6">
-        <Link to="/" className="text-4xl font-bold tracking-tight">
+        <Link
+          to={user ? "/feed" : "/"}
+          className="text-4xl font-bold tracking-tight"
+        >
           Memories
         </Link>
       </div>
