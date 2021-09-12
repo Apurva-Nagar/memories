@@ -21,10 +21,11 @@ export const signup = (formData, history) => async (dispatch) => {
   }
 };
 
-export const signout = () => async (dispatch) => {
+export const signout = (history) => async (dispatch) => {
   try {
     const { data } = await api.signOut();
     dispatch({ type: SIGNOUT, payload: data });
+    history.push("/auth");
   } catch (err) {
     console.log(err);
   }

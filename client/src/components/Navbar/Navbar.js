@@ -15,9 +15,8 @@ const Navbar = () => {
   );
 
   const handleLogout = () => {
-    dispatch(signout());
+    dispatch(signout(history));
     setUser(null);
-    history.push("/auth");
   };
 
   useEffect(() => {
