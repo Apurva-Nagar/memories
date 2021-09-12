@@ -2,15 +2,17 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
-API.interceptors.request.use((req) => {
-  if (localStorage.getItem("user_auth")) {
-    req.headers.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("user_auth")).token
-    }`;
-  }
+// API.interceptors.request.use((req) => {
+//   if (localStorage.getItem("user_auth")) {
+//     req.headers.Authorization = `Bearer ${
+//       JSON.parse(localStorage.getItem("user_auth")).token
+//     }`;
+//   }
 
-  return req;
-});
+//   return req;
+// });
+
+API.defaults.withCredentials = true;
 
 export const fetchPosts = () => API.get("/posts");
 export const createPost = (newPost) => API.post("/posts", newPost);
@@ -21,3 +23,4 @@ export const likePost = (id) => API.patch(`posts/${id}/like-post`);
 
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
+export const signOut = () => API.delete("/user/signout");

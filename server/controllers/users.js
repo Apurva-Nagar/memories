@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 export const signUp = async (req, res) => {
@@ -20,15 +18,13 @@ export const signUp = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    const token = jwt.sign(
-      { id: newUser._id, email: newUser.email },
-      process.env.TOKEN_SECRET,
-      { expiresIn: "1h" }
-    );
 
-    return res.status(200).json({ result: newUser, token });
+    req.session.user = { id: newUser._id, name, email };
+    return res
+      .status(200)
+      .json({ message: "Registration Successful!", user: req.session.user });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong." });
+    return res.status(500).json({ message: "Something went wrong." });
   }
 };
 
@@ -49,13 +45,21 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ message: "Invalid password." });
     }
 
-    const token = jwt.sign(
-      { id: existingUser._id, email: existingUser.email },
-      process.env.TOKEN_SECRET,
-      { expiresIn: "1h" }
-    );
-    res.status(200).json({ result: existingUser, token });
+    req.session.user = { id: existingUser._id, name: existingUser.name, email };
+    return res
+      .status(200)
+      .json({ message: "Sign in successful!", user: req.session.user });
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong." });
+    return res.status(500).json({ message: "Something went wrong." });
   }
+};
+
+export const signOut = (req, res) => {
+  if (!req.session.user) {
+    return res.status(400).json({ message: "User is not signed in." });
+  }
+  req.session.destroy((err) => {
+    if (err) return res.status(500).json({ message: "Something went wrong." });
+    return res.status(200).json({ message: "Sign out successful!" });
+  });
 };

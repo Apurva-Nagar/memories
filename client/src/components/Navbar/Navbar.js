@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation, Link } from "react-router-dom";
 
+import { signout } from "../../actions/auth";
 import UserDropDown from "./UserDropDown/UserDropDown";
 
 const Navbar = () => {
@@ -14,9 +15,9 @@ const Navbar = () => {
   );
 
   const handleLogout = () => {
-    dispatch({ type: "LOGOUT", payload: null });
-    history.push("/auth");
+    dispatch(signout());
     setUser(null);
+    history.push("/auth");
   };
 
   useEffect(() => {
@@ -65,10 +66,7 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <UserDropDown
-            userDetails={user?.result}
-            handleLogout={() => handleLogout}
-          />
+          <UserDropDown userDetails={user} handleLogout={() => handleLogout} />
         )}
       </div>
     </nav>

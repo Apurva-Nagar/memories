@@ -1,20 +1,13 @@
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const isOAuthToken = token.length < 500 ? false : true;
-    let decodedToken = null;
+    // const token = req.headers.authorization.split(" ")[1];
+    // const decodedToken = jwt.decode(token);
+    // req.userId = decodedToken?.sub;
 
-    if (isOAuthToken) {
-      decodedToken = jwt.decode(token);
-      req.userId = decodedToken?.sub;
-    } else {
-      decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-      req.userId = decodedToken?.id;
-    }
-
-    next();
+    if (req.session.user) next();
+    else res.status(401).json({ message: "Not authenticated" });
   } catch (err) {
     console.log(err);
   }
