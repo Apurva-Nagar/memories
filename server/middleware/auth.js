@@ -6,8 +6,12 @@ const auth = async (req, res, next) => {
     // const decodedToken = jwt.decode(token);
     // req.userId = decodedToken?.sub;
 
-    if (req.session.user) next();
-    else res.status(401).json({ message: "Not authenticated" });
+    if (req.session.user) {
+      req.userId = req.session.user.id;
+      next();
+    } else {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
   } catch (err) {
     console.log(err);
   }

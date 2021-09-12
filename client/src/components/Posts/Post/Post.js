@@ -13,13 +13,12 @@ const Post = ({ post, setPostId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user_auth"));
   const postedByUser =
-    user?.result?.googleId === post?.creator ||
-    user?.result?._id === post?.creator;
+    user?.result?.googleId === post?.creator || user?.id === post?.creator;
 
   const PostLikes = () => {
     const { likes } = post;
     const likedByUser = likes.find(
-      (like) => like === (user?.result?.googleId || user?.result?._id)
+      (like) => like === (user?.result?.googleId || user?.id)
     );
 
     const likeCount = () => {

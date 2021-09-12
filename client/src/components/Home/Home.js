@@ -33,7 +33,8 @@ const Home = () => {
           <Posts setPostId={setPostId} />
         </div>
         <div className="col-span-1">
-          <div className="flex justify-center mt-10 sticky top-10">
+          {/* sticky top-10 below and fix bug */}
+          <div className="flex justify-center mt-10">
             <Form postId={postId} setPostId={setPostId} />
           </div>
         </div>
