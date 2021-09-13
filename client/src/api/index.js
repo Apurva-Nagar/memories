@@ -2,15 +2,13 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
-// API.interceptors.request.use((req) => {
-//   if (localStorage.getItem("user_auth")) {
-//     req.headers.Authorization = `Bearer ${
-//       JSON.parse(localStorage.getItem("user_auth")).token
-//     }`;
-//   }
-
-//   return req;
-// });
+const token = JSON.parse(localStorage.getItem("user_auth"))?.token;
+if (token) {
+  API.interceptors.request.use((req) => {
+    req.headers.Authorization = `Bearer ${token}`;
+    return req;
+  });
+}
 
 API.defaults.withCredentials = true;
 

@@ -3,7 +3,6 @@ import avatar from "../../../assets/avatar.png";
 
 const UserDropDown = ({ userDetails, handleLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log(userDetails, userDetails.token);
   if (userDetails.token) {
     var { name, imageUrl } = userDetails.result;
   } else {

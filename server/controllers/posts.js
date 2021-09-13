@@ -70,10 +70,6 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
-  if (!req.userId) {
-    return res.json({ message: "Login to continue" });
-  }
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ message: `Invalid id - ${id}` });
   }
