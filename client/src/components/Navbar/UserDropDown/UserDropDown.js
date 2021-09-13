@@ -3,6 +3,12 @@ import avatar from "../../../assets/avatar.png";
 
 const UserDropDown = ({ userDetails, handleLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  console.log(userDetails, userDetails.token);
+  if (userDetails.token) {
+    var { name, imageUrl } = userDetails.result;
+  } else {
+    var { name } = userDetails;
+  }
 
   return (
     <>
@@ -12,13 +18,13 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
             <div className="flex justify-center items-center space-x-3 cursor-pointer mr-10">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-600">
                 <img
-                  src={userDetails.imageUrl ? userDetails.imageUrl : avatar}
-                  alt={userDetails.name}
+                  src={userDetails.result ? imageUrl : avatar}
+                  alt={name}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="font-semibold text-gray-900 text-lg">
-                <div className="cursor-pointer">{userDetails.name}</div>
+                <div className="cursor-pointer">{name}</div>
               </div>
             </div>
             {menuOpen && (

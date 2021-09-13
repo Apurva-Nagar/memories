@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { AUTH } from "../../constants/actionTypes";
+import { GOOGLE_AUTH } from "../../constants/actionTypes";
 import { signin, signup } from "../../actions/auth";
 import { GoogleLogin } from "react-google-login";
 
@@ -52,7 +52,7 @@ const Auth = () => {
     const token = res?.tokenId;
 
     try {
-      dispatch({ type: AUTH, payload: { token, result } });
+      dispatch({ type: GOOGLE_AUTH, payload: { token, result } });
       history.push("/feed");
     } catch (error) {
       console.log(error);

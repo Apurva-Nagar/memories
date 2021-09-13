@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory, useLocation, Link } from "react-router-dom";
 
 import { signout } from "../../actions/auth";
+import { SIGNOUT } from "../../constants/actionTypes";
 import UserDropDown from "./UserDropDown/UserDropDown";
 
 const Navbar = () => {
@@ -15,7 +16,12 @@ const Navbar = () => {
   );
 
   const handleLogout = () => {
-    dispatch(signout(history));
+    if (user.token) {
+      dispatch({ type: SIGNOUT, payload: null });
+      history.push("/auth");
+    } else {
+      dispatch(signout(history));
+    }
     setUser(null);
   };
 
