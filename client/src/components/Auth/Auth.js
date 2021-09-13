@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Redirect } from "react-router-dom";
 
 import { GOOGLE_AUTH } from "../../constants/actionTypes";
 import { signin, signup } from "../../actions/auth";
@@ -63,7 +63,17 @@ const Auth = () => {
     console.log(`Google Authentication Failed - ${error}`);
   };
 
-  return (
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("user_auth"))
+  );
+
+  useEffect(() => {
+    setIsLoggedIn(JSON.parse(localStorage.getItem("user_auth")));
+  }, [location]);
+
+  return isLoggedIn ? (
+    <Redirect to="/feed" />
+  ) : (
     <div className="flex flex-col items-center mt-16 mb-10">
       <h1 className="text-2xl font-bold">
         {isSignIn ? "Welcome Back!" : "Create Your Account"}
