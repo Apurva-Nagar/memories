@@ -63,3 +63,7 @@ export const signOut = (req, res) => {
     return res.status(200).json({ message: "Sign out successful!" });
   });
 };
+
+export const getXSRFToken = (req, res) => {
+  return res.status(200).json({ xsrfToken: req.csrfToken() });
+};

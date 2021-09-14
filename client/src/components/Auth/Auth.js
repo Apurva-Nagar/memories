@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory, useLocation, Redirect } from "react-router-dom";
 
 import { GOOGLE_AUTH } from "../../constants/actionTypes";
-import { signin, signup } from "../../actions/auth";
+import { signin, signup, xsrftoken } from "../../actions/auth";
 import { GoogleLogin } from "react-google-login";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,6 +26,10 @@ const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+
+  useEffect(() => {
+    dispatch(xsrftoken());
+  }, []);
 
   useEffect(() => {
     if (location?.state) {

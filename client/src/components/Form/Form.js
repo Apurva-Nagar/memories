@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
+import { xsrftoken } from "../../actions/auth";
 
 const Form = ({ postId, setPostId }) => {
   const post = useSelector((state) =>
     postId ? state.posts.find((post) => post._id === postId) : null
   );
+
   const [postData, setPostData] = useState({
     caption: "",
     tags: [],
@@ -19,7 +21,12 @@ const Form = ({ postId, setPostId }) => {
     }
   }, [post, postId]);
 
+  useEffect(() => {
+    dispatch(xsrftoken());
+  }, []);
+
   const user = JSON.parse(localStorage.getItem("user_auth"));
+  const { name } = user.token ? user.result : user;
 
   const dispatch = useDispatch();
 
@@ -36,9 +43,9 @@ const Form = ({ postId, setPostId }) => {
     e.preventDefault();
 
     if (postId) {
-      dispatch(updatePost(postId, { ...postData, name: user?.name }));
+      dispatch(updatePost(postId, { ...postData, name: name }));
     } else {
-      dispatch(createPost({ ...postData, name: user?.name }));
+      dispatch(createPost({ ...postData, name: name }));
     }
 
     clear();

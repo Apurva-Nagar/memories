@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import session from "express-session";
 import redis from "redis";
 import connectRedis from "connect-redis";
+import csrf from "csurf";
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
@@ -37,6 +38,8 @@ app.use(
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cookieParser());
+
+app.use(csrf({ cookie: false }));
 
 app.use("/user", userRoutes);
 app.use("/posts", postRoutes);
