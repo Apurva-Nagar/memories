@@ -24,7 +24,7 @@ export const signUp = async (req, res) => {
       .status(200)
       .json({ message: "Registration Successful!", user: req.session.user });
   } catch (err) {
-    return res.status(500).json({ message: "Something went wrong." });
+    return res.status(500).json({ errors: [err.message] });
   }
 };
 
@@ -50,7 +50,7 @@ export const signIn = async (req, res) => {
       .status(200)
       .json({ message: "Sign in successful!", user: req.session.user });
   } catch (err) {
-    return res.status(500).json({ message: "Something went wrong." });
+    return res.status(500).json({ errors: [err.message] });
   }
 };
 
@@ -59,7 +59,7 @@ export const signOut = (req, res) => {
     return res.status(400).json({ message: "User is not signed in." });
   }
   req.session.destroy((err) => {
-    if (err) return res.status(500).json({ message: "Something went wrong." });
+    if (err) return res.status(500).json({ errors: [err.message] });
     return res.status(200).json({ message: "Sign out successful!" });
   });
 };

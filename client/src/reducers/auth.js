@@ -1,9 +1,4 @@
-import {
-  AUTH,
-  GOOGLE_AUTH,
-  SIGNOUT,
-  XSRF_TOKEN,
-} from "../constants/actionTypes";
+import { AUTH, GOOGLE_AUTH, SIGNOUT } from "../constants/actionTypes";
 
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {

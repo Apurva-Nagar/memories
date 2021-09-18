@@ -5,3 +5,5 @@ export const DELETE = "DELETE";
 export const AUTH = "AUTH";
 export const GOOGLE_AUTH = "GOOGLE_AUTH";
 export const SIGNOUT = "SIGNOUT";
+export const ERROR = "ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";

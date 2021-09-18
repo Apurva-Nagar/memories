@@ -6,7 +6,7 @@ export const getPosts = async (req, res) => {
     const posts = await PostMessage.find();
     res.status(200).json(posts);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ errors: [err.message] });
   }
 };
 
@@ -22,7 +22,7 @@ export const createPost = async (req, res) => {
     await newPost.save();
     res.status(201).json(newPost);
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    res.status(409).json({ errors: [err.message] });
   }
 };
 
@@ -48,7 +48,7 @@ export const updatePost = async (req, res) => {
     await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
     res.status(200).json(updatedPost);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ errors: [err.message] });
   }
 };
 
@@ -63,7 +63,7 @@ export const deletePost = async (req, res) => {
     await PostMessage.findByIdAndRemove(id);
     res.status(200).json({ message: "Post deleted" });
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ errors: [err.message] });
   }
 };
 
@@ -85,6 +85,6 @@ export const likePost = async (req, res) => {
     await post.save();
     res.status(200).json(post);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ errors: [err.message] });
   }
 };
