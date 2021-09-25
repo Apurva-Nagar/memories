@@ -8,7 +8,7 @@ export const signUp = async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
-        message: "User already exists",
+        errors: ["User already exists"],
       });
     }
 
@@ -34,7 +34,7 @@ export const signIn = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      return res.status(400).json({ message: "User doesn't exsist." });
+      return res.status(400).json({ errors: ["User doesn't exsist."] });
     }
 
     const isValidPassword = await bcrypt.compare(
@@ -42,7 +42,7 @@ export const signIn = async (req, res) => {
       existingUser.password
     );
     if (!isValidPassword) {
-      return res.status(400).json({ message: "Invalid password." });
+      return res.status(400).json({ errors: ["Invalid password."] });
     }
 
     req.session.user = { id: existingUser._id, name: existingUser.name, email };
@@ -56,7 +56,7 @@ export const signIn = async (req, res) => {
 
 export const signOut = (req, res) => {
   if (!req.session.user) {
-    return res.status(400).json({ message: "User is not signed in." });
+    return res.status(400).json({ errors: ["User is not signed in."] });
   }
   req.session.destroy((err) => {
     if (err) return res.status(500).json({ errors: [err.message] });

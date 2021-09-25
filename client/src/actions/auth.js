@@ -4,7 +4,6 @@ import { API } from "../api/index";
 
 export const signin = (formData, history) => async (dispatch) => {
   try {
-    throw new Error("test sign in");
     const { data } = await api.signIn(formData);
     dispatch({ type: AUTH, payload: data });
     history.push("/feed");

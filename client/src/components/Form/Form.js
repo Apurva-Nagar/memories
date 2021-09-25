@@ -61,7 +61,7 @@ const Form = ({ postId, setPostId }) => {
       )}
       <form className="mt-5" onSubmit={handleSubmit}>
         <textarea
-          placeholder="Caption"
+          placeholder="Caption*"
           className="resize-none appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 p-2 mt-4"
           required="required"
           name="caption"
@@ -74,7 +74,7 @@ const Form = ({ postId, setPostId }) => {
           }
         />
         <input
-          placeholder="Tags"
+          placeholder="Tags*"
           className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
           required="required"
           type="text"

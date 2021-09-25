@@ -31,7 +31,7 @@ export const updatePost = async (req, res) => {
   const { caption, creator, selectedFile, tags, likes, name } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: `Invalid id - ${id}` });
+    return res.status(400).json({ errors: ["Failed to edit post."] });
   }
 
   const updatedPost = {
@@ -56,7 +56,7 @@ export const deletePost = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: `Invalid id - ${id}` });
+    return res.status(400).json({ errors: ["Failed to delete post."] });
   }
 
   try {
@@ -71,7 +71,7 @@ export const likePost = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: `Invalid id - ${id}` });
+    return res.status(400).json({ errors: ["Failed to like post."] });
   }
 
   try {
