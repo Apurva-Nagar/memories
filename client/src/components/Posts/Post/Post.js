@@ -56,7 +56,7 @@ const Post = ({ post, setPostId }) => {
   };
 
   return (
-    <div className="container mx-auto max-w-lg bg-white rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transform transition-all duration-500 mt-8">
+    <div className="container mx-auto max-w-lg bg-white rounded-xl shadow-2xl mt-8">
       <div className="flex items-center justify-between px-4">
         <div className="flex justify-between items-center py-3">
           <img

@@ -13,7 +13,7 @@ import { createAndUpdatePostValidator } from "../middleware/validators/postValid
 
 const router = express.Router();
 
-router.get("/", getPosts);
+router.get("/", auth, getPosts);
 router.post("/", auth, createAndUpdatePostValidator(), validate, createPost);
 router.patch(
   "/:id",

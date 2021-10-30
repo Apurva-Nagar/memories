@@ -43,7 +43,7 @@ export const xsrftoken = () => async (dispatch) => {
     API.defaults.headers.patch["X-CSRF-Token"] = data.xsrfToken;
     API.defaults.headers.delete["X-CSRF-Token"] = data.xsrfToken;
   } catch (error) {
-    const { errors } = error.response.data;
-    dispatch({ type: ERROR, payload: errors });
+    const errors = error?.response?.data?.errors;
+    if (errors) dispatch({ type: ERROR, payload: errors });
   }
 };
