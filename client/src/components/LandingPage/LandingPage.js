@@ -47,7 +47,7 @@ const LandingPage = () => {
               </button>
             </Link>
             <Link to="/auth" className="w-full">
-              <button className="ml-5 w-full mt-8 p-2 border-2 rounded-lg text-purple-600 border-purple-600 hover:border-transparent hover:bg-purple-600 hover:text-white">
+              <button className="ml-5 w-full mt-8 py-1.5 px-4 border-2 rounded-lg text-purple-600 border-purple-600 hover:border-transparent hover:bg-purple-600 hover:text-white">
                 Login
               </button>
             </Link>

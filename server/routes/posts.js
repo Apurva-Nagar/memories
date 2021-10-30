@@ -10,10 +10,13 @@ import {
 import auth from "../middleware/auth.js";
 import { validate } from "../middleware/validators/validate.js";
 import { createAndUpdatePostValidator } from "../middleware/validators/postValidator.js";
+import paginateResults from "../middleware/paginateResults.js";
+
+import PostMessage from "../models/postMessage.js";
 
 const router = express.Router();
 
-router.get("/", auth, getPosts);
+router.get("/", auth, paginateResults(PostMessage), getPosts);
 router.post("/", auth, createAndUpdatePostValidator(), validate, createPost);
 router.patch(
   "/:id",

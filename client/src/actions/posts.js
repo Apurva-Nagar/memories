@@ -7,9 +7,9 @@ import {
   ERROR,
 } from "../constants/actionTypes";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (params) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
+    const { data } = await api.fetchPosts(params);
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
     const { errors } = error.response.data;

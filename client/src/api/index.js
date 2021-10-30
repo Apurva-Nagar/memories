@@ -13,7 +13,7 @@ if (token) {
 API.defaults.withCredentials = true;
 
 // Post APIs
-export const fetchPosts = () => API.get("/posts");
+export const fetchPosts = (params) => API.get("/posts", { params });
 export const createPost = (newPost) => API.post("/posts", newPost);
 export const updatePost = (id, updatedPost) =>
   API.patch(`/posts/${id}`, updatedPost);

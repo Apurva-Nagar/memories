@@ -78,7 +78,7 @@ const Auth = () => {
   return isLoggedIn ? (
     <Redirect to="/feed" />
   ) : (
-    <div className="flex flex-col items-center mt-16 mb-10">
+    <div className="flex flex-col items-center mt-16 pb-10">
       <h1 className="text-2xl font-bold">
         {isSignIn ? "Welcome Back!" : "Create Your Account"}
       </h1>

@@ -3,7 +3,7 @@ import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
 const postsReducer = (posts = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
-      return action.payload;
+      return action.payload.data;
     case CREATE:
       return [...posts, action.payload];
     case UPDATE:

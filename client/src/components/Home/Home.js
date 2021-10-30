@@ -21,19 +21,18 @@ const Home = () => {
   }, [location]);
 
   useEffect(() => {
-    dispatch(getPosts());
+    dispatch(getPosts({ page: 1, limit: 5 }));
   }, [dispatch]);
 
   return !isLoggedIn ? (
     <Redirect to="/" />
   ) : (
-    <div className="mt-5 p-5 mb-10">
+    <div className="mt-5 p-5 pb-10">
       <div className="grid grid-cols-3">
         <div className="col-span-2">
           <Posts setPostId={setPostId} />
         </div>
         <div className="col-span-1">
-          {/* sticky top-10 below and fix bug */}
           <div className="flex justify-center mt-10">
             <Form postId={postId} setPostId={setPostId} />
           </div>
