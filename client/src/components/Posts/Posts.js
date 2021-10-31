@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from "react";
 import Post from "./Post/Post";
 import { useSelector } from "react-redux";
-import { Loader } from "../loaders";
+import { Loader, PostSkeletonLoader } from "../loaders";
 
 const Posts = ({ setPostId, setPage, isLoading }) => {
   const postPagination = useSelector((state) => state.pagination.posts);
@@ -43,7 +43,9 @@ const Posts = ({ setPostId, setPage, isLoading }) => {
     </>
   ) : (
     <>
-      <p>loading...</p>
+      <PostSkeletonLoader />
+      <PostSkeletonLoader />
+      <PostSkeletonLoader />
     </>
   );
 };

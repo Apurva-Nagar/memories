@@ -32,3 +32,26 @@ export const ButtonLoader = ({ buttonStyle, buttonText }) => {
     </button>
   );
 };
+
+export const PostSkeletonLoader = () => {
+  return (
+    <div className="animate-pulse mt-12 border border-purple-300 shadow rounded-md p-4 max-w-lg w-full mx-auto">
+      <div className="flex space-x-4">
+        <div className="rounded-full bg-purple-200 h-12 w-12"></div>
+        <div className="flex-1 space-y-4 py-1">
+          <div className="h-4 bg-purple-200 rounded w-1/2"></div>
+          <div className="h-3 bg-purple-200 rounded w-1/4"></div>
+        </div>
+      </div>
+      <div className="mt-4 h-64 bg-purple-200 rounded w-full"></div>
+      <div className="mt-4 h-4 bg-purple-200 rounded w-full"></div>
+      <div className="mt-4 h-2 bg-purple-200 rounded w-3/4"></div>
+      <div className="mt-4 h-2 bg-purple-200 rounded w-full"></div>
+      <div className="mt-4 h-2 bg-purple-200 rounded w-1/2"></div>
+      <div className="mt-4 flex space-x-4">
+        <div className="h-4 bg-purple-200 rounded w-6"></div>
+        <div className="h-4 bg-purple-200 rounded w-14"></div>
+      </div>
+    </div>
+  );
+};
