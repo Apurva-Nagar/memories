@@ -9,7 +9,7 @@ import {
   faEdit as farEdit,
 } from "@fortawesome/free-regular-svg-icons";
 
-const Post = ({ post, setPostId }) => {
+const Post = React.forwardRef(({ post, setPostId }, lastPostRef) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user_auth"));
   const postedByUser =
@@ -56,7 +56,10 @@ const Post = ({ post, setPostId }) => {
   };
 
   return (
-    <div className="container mx-auto max-w-lg bg-white rounded-xl shadow-2xl mt-8">
+    <div
+      ref={lastPostRef}
+      className="container mx-auto max-w-lg bg-white rounded-xl shadow-2xl mt-8"
+    >
       <div className="flex items-center justify-between px-4">
         <div className="flex justify-between items-center py-3">
           <img
@@ -97,6 +100,6 @@ const Post = ({ post, setPostId }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Post;

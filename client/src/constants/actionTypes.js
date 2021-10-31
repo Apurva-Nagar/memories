@@ -7,3 +7,4 @@ export const GOOGLE_AUTH = "GOOGLE_AUTH";
 export const SIGNOUT = "SIGNOUT";
 export const ERROR = "ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const POST_PAGE = "POST_PAGE";
