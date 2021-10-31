@@ -10,6 +10,7 @@ import csrf from "csurf";
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/users.js";
+import profileRoutes from "./routes/profile.js";
 
 const app = express();
 dotenv.config();
@@ -43,6 +44,7 @@ app.use(csrf({ cookie: false }));
 
 app.use("/user", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/profile", profileRoutes);
 
 const PORT = process.env.PORT || 5000;
 
