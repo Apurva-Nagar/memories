@@ -13,6 +13,8 @@ import {
   faEyeSlash as farEyeSlash,
 } from "@fortawesome/free-regular-svg-icons";
 
+import { ButtonLoader } from "../loaders";
+
 const initialFormState = {
   name: "",
   email: "",
@@ -26,6 +28,7 @@ const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(xsrftoken());
@@ -38,13 +41,15 @@ const Auth = () => {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (isSignIn) {
-      dispatch(signin(formData, history));
+      await dispatch(signin(formData, history));
     } else {
-      dispatch(signup(formData, history));
+      await dispatch(signup(formData, history));
     }
+    setIsLoading(false);
   };
 
   const handleChange = (e) => {
@@ -86,7 +91,7 @@ const Auth = () => {
         {!isSignIn && (
           <input
             placeholder="Name"
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
+            className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
             required="required"
             type="text"
             name="name"
@@ -97,7 +102,7 @@ const Auth = () => {
         )}
         <input
           placeholder="Email"
-          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
+          className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
           required="required"
           type="email"
           name="email"
@@ -107,7 +112,7 @@ const Auth = () => {
         <div className="relative">
           <input
             placeholder="Password"
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
+            className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
             required="required"
             type={showPassword ? "text" : "password"}
             name="password"
@@ -127,12 +132,19 @@ const Auth = () => {
           </div>
         </div>
 
-        <button
-          className="w-2/3 mt-8 py-2 px-4 text-white font-semibold rounded-lg bg-purple-600 shadow-lg"
-          type="submit"
-        >
-          {isSignIn ? "Sign In" : "Sign Up"}
-        </button>
+        {!isLoading ? (
+          <button
+            className="w-2/3 mt-8 py-2 px-4 text-white font-semibold rounded-lg bg-purple-600 shadow-lg"
+            type="submit"
+          >
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </button>
+        ) : (
+          <ButtonLoader
+            buttonStyle="w-2/3 mt-8 py-2 px-4 text-white font-semibold rounded-lg bg-purple-600 shadow-lg inline-flex items-center justify-between"
+            buttonText={isSignIn ? "Sign In" : "Sign Up"}
+          />
+        )}
 
         <p className="text-xl font-bold mt-3">OR</p>
         <GoogleLogin

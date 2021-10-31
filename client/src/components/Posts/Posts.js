@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from "react";
 import Post from "./Post/Post";
 import { useSelector } from "react-redux";
-import { Loader } from "../loader";
+import { Loader } from "../loaders";
 
 const Posts = ({ setPostId, setPage, isLoading }) => {
   const postPagination = useSelector((state) => state.pagination.posts);
