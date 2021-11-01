@@ -2,10 +2,10 @@ import bcrypt from "bcrypt";
 import User from "../models/user.js";
 
 export const signUp = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, username } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({
         errors: ["User already exists"],
@@ -17,9 +17,10 @@ export const signUp = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      username,
     });
 
-    req.session.user = { id: newUser._id, name, email };
+    req.session.user = { id: newUser._id, name: name, username: username };
     return res
       .status(200)
       .json({ message: "Registration Successful!", user: req.session.user });
@@ -29,10 +30,10 @@ export const signUp = async (req, res) => {
 };
 
 export const signIn = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ username });
     if (!existingUser) {
       return res.status(400).json({ errors: ["User doesn't exsist."] });
     }
@@ -45,7 +46,11 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ errors: ["Invalid password."] });
     }
 
-    req.session.user = { id: existingUser._id, name: existingUser.name, email };
+    req.session.user = {
+      id: existingUser._id,
+      name: existingUser.name,
+      username: existingUser.username,
+    };
     return res
       .status(200)
       .json({ message: "Sign in successful!", user: req.session.user });

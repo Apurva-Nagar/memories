@@ -5,6 +5,6 @@ import { getProfile } from "../controllers/profile.js";
 const router = express.Router();
 
 // ADD auth middleware
-router.get("/:userId", getProfile);
+router.get("/:username", getProfile);
 
 export default router;

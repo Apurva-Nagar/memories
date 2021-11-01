@@ -17,6 +17,7 @@ import { ButtonLoader } from "../loaders";
 
 const initialFormState = {
   name: "",
+  username: "",
   email: "",
   password: "",
 };
@@ -89,24 +90,35 @@ const Auth = () => {
       </h1>
       <form onSubmit={handleSubmit} className="w-1/3 text-center mt-3">
         {!isSignIn && (
-          <input
-            placeholder="Name"
-            className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
-            required="required"
-            type="text"
-            name="name"
-            id="name"
-            onChange={handleChange}
-            autoFocus
-          />
+          <>
+            <input
+              placeholder="Name"
+              className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
+              required="required"
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleChange}
+              autoFocus
+            />
+            <input
+              placeholder="Email"
+              className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
+              required="required"
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleChange}
+            />
+          </>
         )}
         <input
-          placeholder="Email"
+          placeholder="Username"
           className="outline-none focus:border-purple-600 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 mt-4"
           required="required"
-          type="email"
-          name="email"
-          id="email"
+          type="text"
+          id="username"
+          name="username"
           onChange={handleChange}
         />
         <div className="relative">

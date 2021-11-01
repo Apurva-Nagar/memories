@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
+import { Redirect } from "react-router-dom";
 import { getProfile } from "../../actions/profile";
 
 import ProfilePosts from "./ProfilePosts";
@@ -29,7 +30,7 @@ const Profile = () => {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      await dispatch(getProfile(user.id));
+      await dispatch(getProfile(user.username));
       setIsLoading(false);
     }
     fetchData();
@@ -46,6 +47,9 @@ const Profile = () => {
           </div>
           <div className="flex flex-col">
             <div className="text-3xl ml-8 mt-4">{profile.name}</div>
+            <div className="text-lg ml-8 mt-4 font-semibold">
+              @{profile.username}
+            </div>
           </div>
         </div>
         <ProfilePosts />

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const ProfilePosts = () => {
   const posts = useSelector((state) => state.profile.posts);
 
-  return (
+  return posts.length ? (
     <div className="mt-8 px-8">
       <h1 className="text-lg pb-4">Your Posts</h1>
       <div className="mt-4 grid grid-cols-3 gap-4 pb-20">
@@ -17,6 +17,8 @@ const ProfilePosts = () => {
         })}
       </div>
     </div>
+  ) : (
+    <p>Empty State - Nothing to show</p>
   );
 };
 
