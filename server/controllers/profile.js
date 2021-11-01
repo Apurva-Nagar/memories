@@ -17,8 +17,6 @@ export const getProfile = async (req, res) => {
 
     const userPosts = await PostMessage.find({ creator: userId });
 
-    console.log(existingUser);
-
     res
       .status(200)
       .json({ profile_details: { name: existingUser.name }, posts: userPosts });

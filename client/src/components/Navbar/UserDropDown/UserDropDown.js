@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import avatar from "../../../assets/avatar.png";
 
 const UserDropDown = ({ userDetails, handleLogout }) => {
@@ -33,8 +34,8 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
               >
                 <ul className="space-y-3">
                   <li className="font-medium">
-                    <a
-                      href="#"
+                    <Link
+                      to="/profile"
                       className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
                     >
                       <div className="mr-3">
@@ -53,8 +54,8 @@ const UserDropDown = ({ userDetails, handleLogout }) => {
                           ></path>
                         </svg>
                       </div>
-                      Account
-                    </a>
+                      Profile
+                    </Link>
                   </li>
                   <li className="font-medium">
                     <a

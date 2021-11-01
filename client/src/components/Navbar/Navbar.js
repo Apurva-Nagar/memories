@@ -6,6 +6,9 @@ import { signout } from "../../actions/auth";
 import { SIGNOUT } from "../../constants/actionTypes";
 import UserDropDown from "./UserDropDown/UserDropDown";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,13 +44,12 @@ const Navbar = () => {
       </div>
       <div className="mt-2 w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
-          <a
-            href="#responsive-header"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Docs
-          </a>
-          <a
+          {user && (
+            <Link to="/feed" className="mx-2">
+              <FontAwesomeIcon icon={faHome} size="lg" />
+            </Link>
+          )}
+          {/* <a
             href="#responsive-header"
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
           >
@@ -58,7 +60,7 @@ const Navbar = () => {
             className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
           >
             Blog
-          </a>
+          </a> */}
         </div>
 
         {!user ? (

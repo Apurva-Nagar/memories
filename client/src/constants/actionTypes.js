@@ -8,3 +8,4 @@ export const SIGNOUT = "SIGNOUT";
 export const ERROR = "ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const POST_PAGE = "POST_PAGE";
+export const FETCH_PROFILE = "FETCH_PROFILE";

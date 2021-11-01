@@ -25,3 +25,6 @@ export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
 export const signOut = () => API.delete("/user/signout");
 export const getXSRFToken = () => API.get("user/xsrf");
+
+// Profile APIs
+export const getProfile = (id) => API.get(`/profile/${id}`);
